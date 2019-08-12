@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { SponsorUserRoutingModule } from './sponsor-user-routing.module';
+import { SponsorUserComponent } from './sponsor-user.component';
+import { SponsorUserService } from './sponsor-user.service';
+
+
+@NgModule({
+  declarations: [SponsorUserComponent],
+  imports: [
+    CommonModule,
+    SponsorUserRoutingModule
+  ],
+  providers: [
+    SponsorUserService
+  ]
+})
+export class SponsorUserModule { }
