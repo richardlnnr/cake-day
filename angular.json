@@ -2,5 +2,128 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "cake-day": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/cake-day",
+      "sourceRoot": "projects/cake-day/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cake-day",
+            "index": "projects/cake-day/src/index.html",
+            "main": "projects/cake-day/src/main.ts",
+            "polyfills": "projects/cake-day/src/polyfills.ts",
+            "tsConfig": "projects/cake-day/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/cake-day/src/favicon.ico",
+              "projects/cake-day/src/assets"
+            ],
+            "styles": [
+              "projects/cake-day/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/cake-day/src/environments/environment.ts",
+                  "with": "projects/cake-day/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cake-day:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cake-day:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cake-day:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cake-day/src/test.ts",
+            "polyfills": "projects/cake-day/src/polyfills.ts",
+            "tsConfig": "projects/cake-day/tsconfig.spec.json",
+            "karmaConfig": "projects/cake-day/karma.conf.js",
+            "assets": [
+              "projects/cake-day/src/favicon.ico",
+              "projects/cake-day/src/assets"
+            ],
+            "styles": [
+              "projects/cake-day/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cake-day/tsconfig.app.json",
+              "projects/cake-day/tsconfig.spec.json",
+              "projects/cake-day/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/cake-day/e2e/protractor.conf.js",
+            "devServerTarget": "cake-day:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cake-day:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "cake-day"
 }
