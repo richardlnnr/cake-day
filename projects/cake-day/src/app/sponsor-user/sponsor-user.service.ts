@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IPerson } from './domain/i-person';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class SponsorUserService {
 
   constructor() { }
 
-  private getDiffDays = (baseD, checkDate) => {  
+  private getDiffDays = (baseD: Date, checkDate: Date): number => {  
     // Garantir que a hora seja sempre zerada
     baseD.setHours(0, 0, 0, 0);
     checkDate.setHours(0, 0, 0, 0);
@@ -17,11 +18,11 @@ export class SponsorUserService {
     return diffDays;
   };
 
-  private getIntervalOrder = (listPeople, diff, intBase) => {
+  private getIntervalOrder = (listPeople: IPerson[], diff: number, intBase: number): number => {
     return Math.ceil((diff - (Math.floor(diff / (listPeople.length * intBase)) * (listPeople.length * intBase))))
   };
 
-  getNextPerson = (listPeople, initialDate, checkDate, intervalDays) => {  
+  getNextPerson = (listPeople: IPerson[], initialDate: Date, checkDate: Date, intervalDays: number) => {  
     const diff = this.getDiffDays(initialDate, checkDate);
     const nextOrder = this.getIntervalOrder(listPeople, diff, intervalDays);
     const nextPeopleOrder = Math.ceil(nextOrder / intervalDays);
