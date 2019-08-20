@@ -1,0 +1,22 @@
+<div class="card elevation">
+    <div class="header">
+      <div class="title text-primary">
+          {{sponsor.name}}
+      </div>
+    </div>
+    <div class="divider"></div>
+      <div class="content">
+        <p class="date"  [ngClass]="sponsor.textColor">{{sponsor.dateToPay | date:'dd/MM/yyyy'}}</p>
+      </div>
+      <div class="footer">
+        <div class="main-information" *ngIf="sponsor.showControls">
+          <div class="slot">
+            <span class="text-primary" (click)="checkPreviousSponsor()">Anterior</span>
+          </div>
+          <div class="slot">
+            <span class="text-primary" (click)="checkNextSponsor()">Próximo</span>
+          </div>
+        </div>
+        <div class="pay-order text-secondary">Ordem de pagamento {{sponsor.order}}</div>
+      </div>
+  </div>
