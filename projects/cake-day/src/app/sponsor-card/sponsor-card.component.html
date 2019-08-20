@@ -10,13 +10,9 @@
       </div>
       <div class="footer">
         <div class="main-information" *ngIf="sponsor.showControls">
-          <div class="slot">
-            <span class="text-primary" (click)="checkPreviousSponsor()">Anterior</span>
-          </div>
-          <div class="slot">
-            <span class="text-primary" (click)="checkNextSponsor()">Próximo</span>
-          </div>
+            <i class="material-icons text-primary" (click)="checkPreviousSponsor()">arrow_back</i>
+            <div class="pay-order text-secondary">Ordem do pagamento {{sponsor.order}}</div>
+            <i class="material-icons text-primary" (click)="checkNextSponsor()">arrow_forward</i>
         </div>
-        <div class="pay-order text-secondary">Ordem de pagamento {{sponsor.order}}</div>
       </div>
   </div>
