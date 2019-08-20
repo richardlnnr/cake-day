@@ -57,28 +57,28 @@ describe('SponsorUserService', () => {
   it('should bring the first person', () => {
     const initialDate = new Date('2019/7/19');
     const checkDate = new Date('2019/7/20');
-    const nextPerson = service.getNextPerson(peopleList, initialDate, checkDate, intervalDays);
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
     expect(nextPerson.name).toEqual('Jeferson');
   });
 
   it('should continuous bringing the first person', () => {
     const initialDate = new Date('2019/7/19');
     const checkDate = new Date('2019/7/26');
-    const nextPerson = service.getNextPerson(peopleList, initialDate, checkDate, intervalDays);
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
     expect(nextPerson.name).toEqual('Jeferson');
   });
 
   it('should bring the fourth person', () => {
     const initialDate = new Date('2019/7/19');
     const checkDate = new Date('2019/8/15');
-    const nextPerson = service.getNextPerson(peopleList, initialDate, checkDate, intervalDays);
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
     expect(nextPerson.name).toEqual('Richard');
   });
 
   it('should bring the fourth person', () => {
     const initialDate = new Date('2019/7/19');
     const checkDate = new Date('2019/8/19');
-    const nextPerson = service.getNextPerson(peopleList, initialDate, checkDate, intervalDays);
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
     expect(nextPerson.name).toEqual('Ivan');
   });
 

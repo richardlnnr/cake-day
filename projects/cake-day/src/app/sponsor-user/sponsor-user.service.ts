@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IPerson } from './domain/i-person';
+import { ISponsor } from '../i-sponsor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SponsorUserService {
+
+  private nextDayToPay: Date = this.getDateToPay(new Date());
 
   constructor() { }
 
@@ -18,15 +20,42 @@ export class SponsorUserService {
     return diffDays;
   };
 
-  private getIntervalOrder = (listPeople: IPerson[], diff: number, intBase: number): number => {
+  private getIntervalOrder = (listPeople: ISponsor[], diff: number, intBase: number): number => {
     return Math.ceil((diff - (Math.floor(diff / (listPeople.length * intBase)) * (listPeople.length * intBase))))
   };
 
-  getNextPerson = (listPeople: IPerson[], initialDate: Date, checkDate: Date, intervalDays: number) => {  
+  private getDateToPay(checkDate: Date): Date {
+    const nextDayToPay = new Date(checkDate);
+    nextDayToPay.setDate(checkDate.getDate() + (5 + 7 - checkDate.getDay()) % 7);
+    nextDayToPay.setHours(0, 0, 0, 0);
+    return nextDayToPay;
+  }
+
+  private getColorText(checkDate: Date): string {
+    let textColor = '';
+
+    if (this.nextDayToPay.getTime() > checkDate.getTime()) {
+      textColor = 'text-green';
+    } else if (this.nextDayToPay.getTime() === checkDate.getTime()) {
+      textColor = 'text-red';
+    } else {
+      textColor = 'text-orange';
+    }
+
+    return textColor;
+  }
+
+  getNextSponsor = (listPeople: ISponsor[], initialDate: Date, checkDate: Date, intervalDays: number) => {  
+
     const diff = this.getDiffDays(initialDate, checkDate);
     const nextOrder = this.getIntervalOrder(listPeople, diff, intervalDays);
-    const nextPeopleOrder = Math.ceil(nextOrder / intervalDays);
-    
-    return listPeople.find(p => p.order === nextPeopleOrder);
+    const nextSponsorOrder = Math.ceil(nextOrder / intervalDays);
+
+    const nextSponsor = listPeople.find(p => p.order === nextSponsorOrder);
+    nextSponsor.dateToPay = this.getDateToPay(checkDate);
+    nextSponsor.textColor = this.getColorText(nextSponsor.dateToPay);
+    nextSponsor.showControls = true;
+
+    return nextSponsor;
   };
 }

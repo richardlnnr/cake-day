@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SponsorUserService } from './sponsor-user.service';
-import { IPerson } from './domain/i-person';
+import { ISponsor } from '../i-sponsor';
 
 @Component({
   selector: 'app-sponsor-user',
@@ -9,8 +9,10 @@ import { IPerson } from './domain/i-person';
 })
 export class SponsorUserComponent implements OnInit {
 
+  private initialDate = new Date('Fri Jul 19 2019'); // Sexta-feira anterior ao primeiro dia
+  private checkDate: Date;
   intervalDays = 7;
-  peopleList: IPerson[] = [
+  peopleList: ISponsor[] = [
     {
       name: 'Jeferson',
       order: 1 // 1 - 7
@@ -49,17 +51,32 @@ export class SponsorUserComponent implements OnInit {
       order: 12 // 78 - 84
     }
   ];
-  currentSponsor: IPerson;
-  nextDayToPay: Date;
+
+  currentSponsor: ISponsor;
 
   constructor(private userService: SponsorUserService) { }
 
   ngOnInit() {
-    this.nextDayToPay = new Date();
-    this.nextDayToPay.setDate(this.nextDayToPay.getDate() + (5 + 7 - this.nextDayToPay.getDay()) % 7);
+    this.checkDate = new Date();
+    this.getSponsor();
+  }
 
-    const initialDate = new Date('Fri Jul 19 2019'); // Sexta-feira anterior ao primeiro dia
-    this.currentSponsor = this.userService.getNextPerson(this.peopleList, initialDate, new Date(), this.intervalDays);
+  private getSponsor() {
+    this.currentSponsor = this.userService.getNextSponsor(this.peopleList, this.initialDate, this.checkDate, this.intervalDays);
+  }
+
+  private getDays(): number {
+    return 1000 * 60 * 60 * 24 * 7;
+  }
+
+  checkPrevious() {
+    this.checkDate = new Date(this.checkDate.getTime() - this.getDays());
+    this.getSponsor();
+  }
+
+  checkNext() {
+    this.checkDate = new Date(this.checkDate.getTime() + this.getDays());
+    this.getSponsor();
   }
 
 }

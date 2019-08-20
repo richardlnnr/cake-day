@@ -1,1 +1,3 @@
-<p>{{currentSponsor.name}} {{nextDayToPay | date:'dd/MM/yyyy'}}</p>
+<section class="card-container">
+    <app-sponsor-card [sponsor]="currentSponsor" (checkPrevious)="checkPrevious()" (checkNext)="checkNext()"></app-sponsor-card>
+</section>
