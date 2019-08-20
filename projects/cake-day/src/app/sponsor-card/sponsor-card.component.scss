@@ -40,28 +40,12 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            align-items: center;
 
-            & > .slot {
-                display: flex;
-                flex-direction: column;
-                padding-bottom: 8px;
-
-                & > .text-secondary {
-                    align-self: center;
-                    padding-bottom: 4px;
-                    font-size: 13px;
-                }
-
-                & > .text-primary {
-                    align-self: center;
-                    font-size: 18px;
-                }
+            & > .pay-order {
+                align-self: center;
+                font-size: 12px;
             }
-        }
-
-        & > .pay-order {
-            align-self: center;
-            font-size: 12px;
         }
     }
 }
