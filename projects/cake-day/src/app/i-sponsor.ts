@@ -4,4 +4,4 @@ export interface ISponsor {
     dateToPay?: Date;
     textColor?: string;
     showControls?: boolean;
-};
+}
