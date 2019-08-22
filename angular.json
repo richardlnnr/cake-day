@@ -25,10 +25,12 @@
             "aot": false,
             "assets": [
               "projects/cake-day/src/favicon.ico",
-              "projects/cake-day/src/assets"
+              "projects/cake-day/src/assets",
+              "projects/cake-day/src/manifest.webmanifest"
             ],
             "styles": [
-              "projects/cake-day/src/styles.scss"
+              "projects/cake-day/src/styles.scss",
+              "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": []
           },
@@ -60,7 +62,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/cake-day/ngsw-config.json"
             }
           }
         },
@@ -90,10 +94,12 @@
             "karmaConfig": "projects/cake-day/karma.conf.js",
             "assets": [
               "projects/cake-day/src/favicon.ico",
-              "projects/cake-day/src/assets"
+              "projects/cake-day/src/assets",
+              "projects/cake-day/src/manifest.webmanifest"
             ],
             "styles": [
-              "projects/cake-day/src/styles.scss"
+              "projects/cake-day/src/styles.scss",
+              "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": []
           }
