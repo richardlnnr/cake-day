@@ -24,7 +24,7 @@ export class SponsorUserService {
     return Math.ceil((diff - (Math.floor(diff / (listPeople.length * intBase)) * (listPeople.length * intBase))));
   }
 
-  private getDateToPay(checkDate: Date): Date {
+  getDateToPay(checkDate: Date): Date {
     const nextDayToPay = new Date(checkDate);
     nextDayToPay.setDate(checkDate.getDate() + (5 + 7 - checkDate.getDay()) % 7);
     nextDayToPay.setHours(0, 0, 0, 0);

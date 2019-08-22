@@ -82,4 +82,36 @@ describe('SponsorUserService', () => {
     expect(nextPerson.name).toEqual('Ivan');
   });
 
+  it('should bring a past person', () => {
+    const initialDate = new Date('2019/7/19');
+    const checkDate = new Date();
+    checkDate.setMonth(checkDate.getMonth() - 1);
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
+    expect(nextPerson.textColor).toEqual('text-green');
+    expect(nextPerson.dateToPay).toEqual(service.getDateToPay(checkDate));
+  });
+
+  it('should bring the current person', () => {
+    const initialDate = new Date('2019/7/19');
+    const checkDate = new Date();
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
+    expect(nextPerson.textColor).toEqual('text-red');
+    expect(nextPerson.dateToPay).toEqual(service.getDateToPay(checkDate));
+  });
+
+  it('should bring a future person', () => {
+    const initialDate = new Date('2019/7/19');
+    const checkDate = new Date();
+    checkDate.setMonth(checkDate.getMonth() + 1);
+    const nextPerson = service.getNextSponsor(peopleList, initialDate, checkDate, intervalDays);
+    expect(nextPerson.textColor).toEqual('text-orange');
+    expect(nextPerson.dateToPay).toEqual(service.getDateToPay(checkDate));
+  });
+
+  it('should format the pay date to friday', () => {
+    const dateCheck = new Date('2019/7/15');
+    const dateCheckFriday = new Date('2019/7/19');
+    expect(dateCheckFriday).toEqual(service.getDateToPay(dateCheck));
+  });
+
 });

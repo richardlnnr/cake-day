@@ -9,8 +9,8 @@ import { ISponsor } from '../i-sponsor';
 })
 export class SponsorUserComponent implements OnInit {
 
-  private initialDate = new Date('Fri Jul 19 2019'); // Sexta-feira anterior ao primeiro dia
-  private checkDate: Date;
+  initialDate = new Date('Fri Jul 19 2019'); // Sexta-feira anterior ao primeiro dia
+  checkDate: Date;
   intervalDays = 7;
   peopleList: ISponsor[] = [
     {
